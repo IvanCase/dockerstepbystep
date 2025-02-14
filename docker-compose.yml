@@ -1,11 +1,18 @@
-version: "3.9"
+version: '3.8'
 
 services:
-  myapp:
-    container_name: myapp
-    image: dockerstepbystep:latest
-    build: .
+  portainer:
+    image: cr.portainer.io/portainer/portainer-ce:latest
+    container_name: portainer
+    restart: always
     ports:
-      - "8080:8080"
+      -"8000:8000"
+      -"9443:9443"
+      -"9000:9000"
+      
     volumes:
-      - "./app_data:/var/app_data"
+      -/var/run/docker.sock:/var/run/docker.sock
+      -portainer_data:/data
+
+volumes:
+  portainer_data:
